@@ -2,7 +2,7 @@ import pytest
 from assertpy import assert_that
 
 from algorithms.algorithms import is_palindrome, count_vowels, count_each_vowels, find_max, find_min, revers_list, \
-    numbers_sum
+    numbers_sum, count_even
 
 
 @pytest.mark.skip
@@ -95,3 +95,16 @@ def test_revers_list(test_num_list, expected_result):
 ])
 def test_numbers_sum(test_num_list, expected_result):
     assert_that(numbers_sum(test_num_list)).is_equal_to(expected_result)
+
+
+@pytest.mark.parametrize("test_num_list, expected_result", [
+    ([-10, -3, -50], 2),
+    ([1, 6, 3], 1),
+    ([1.5, 6, 4.5], 1),
+    ([], 0),
+    ([1], 0),
+    ([444], 1),
+    ([10, 3, 50, -10, -3, -50], 4),
+])
+def test_count_even(test_num_list, expected_result):
+    assert_that(count_even(test_num_list)).is_equal_to(expected_result)

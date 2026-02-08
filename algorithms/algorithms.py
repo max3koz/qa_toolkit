@@ -73,3 +73,15 @@ def numbers_sum(num_list: list) -> int | float:
     for num in num_list:
         num_sum += num
     return num_sum
+
+
+def count_even(num_list: list) -> int:
+    """Counts the even number in the number list"""
+    if not num_list:
+        return 0
+
+    count = 0
+    for num in num_list:
+        if isinstance(num, int) and num % 2 == 0:
+            count += 1
+    return count
