@@ -1,7 +1,8 @@
 import pytest
 from assertpy import assert_that
 
-from algorithms.algorithms import is_palindrome, count_vowels, count_each_vowels, find_max
+from algorithms.algorithms import is_palindrome, count_vowels, count_each_vowels, find_max, find_min, revers_list, \
+    numbers_sum
 
 
 @pytest.mark.skip
@@ -46,7 +47,8 @@ def test_count_vowels(text, expected_result):
 def test_count_each_vowels(text, expected_result):
     assert_that(count_each_vowels(text)).is_equal_to(expected_result)
 
-@pytest.mark.parametrize("test_num_list, expected_result",[
+
+@pytest.mark.parametrize("test_num_list, expected_result", [
     ([-10, -3, -50], -3),
     ([1, 5, 3], 5),
     ([], None),
@@ -55,3 +57,41 @@ def test_count_each_vowels(text, expected_result):
 ])
 def test_max_number(test_num_list, expected_result):
     assert_that(find_max(test_num_list)).is_equal_to(expected_result)
+
+
+@pytest.mark.parametrize("test_num_list, expected_result", [
+    ([-10, -3, -50], -50),
+    ([1, 5, 3], 1),
+    ([], None),
+    ([1], 1),
+    ([-10, -3, -50, -10, -3, -50], -50),
+])
+def test_min_number(test_num_list, expected_result):
+    assert_that(find_min(test_num_list)).is_equal_to(expected_result)
+
+
+@pytest.mark.parametrize("test_num_list, expected_result", [
+    ([-10, -3, -50], [-50, -3, -10]),
+    ([1, 5, 3], [3, 5, 1]),
+    ([], ValueError),
+    ([1], [1]),
+    ([-10, -3, -50, -10, -3, -50], [-50, -3, -10, -50, -3, -10]),
+])
+def test_revers_list(test_num_list, expected_result):
+    if isinstance(expected_result, type) and  issubclass(expected_result, Exception):
+        with pytest.raises(expected_result):
+            revers_list(test_num_list)
+    else:
+        assert_that(revers_list(test_num_list)).is_equal_to(expected_result)
+
+
+@pytest.mark.parametrize("test_num_list, expected_result", [
+    ([-10, -3, -50], -63),
+    ([1, 5, 3], 9),
+    ([1.5, 5.5, 3.5], 10.5),
+    ([], 0),
+    ([1], 1),
+    ([-10, -3, -50, -10, -3, -50], -126),
+])
+def test_numbers_sum(test_num_list, expected_result):
+    assert_that(numbers_sum(test_num_list)).is_equal_to(expected_result)
